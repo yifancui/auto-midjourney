@@ -26,11 +26,11 @@ class App:
         self.running = False
 
         Label(root, text="Excel路径").grid(row=0)
-        Label(root, text="发送命令随机间隔（秒）【推荐5-10】从").grid(row=1, sticky='e')
+        Label(root, text="发送命令随机间隔（秒）【推荐100-200】从").grid(row=1, sticky='e')
         Label(root, text="到").grid(row=1, column=2) 
         Label(root, text="粘贴后等待时间（秒）【推荐2】").grid(row=2, sticky='e')
         Label(root, text="一轮发几条【推荐10】").grid(row=3, sticky='e')
-        Label(root, text="每轮等待随机间隔（秒）【推荐800-1000】从").grid(row=4, sticky='e')
+        Label(root, text="每轮等待随机间隔（秒）【推荐120-300】从").grid(row=4, sticky='e')
         Label(root, text="到").grid(row=4, column=2) 
         Label(root, text="Excel起始位置").grid(row=5)
         Label(root, text="按ESC键终止程序").grid(row=6)
@@ -80,24 +80,37 @@ class App:
     def run(self):
         df = pd.read_excel(self.excel_path.get(), header=0, usecols=[0])
         df.columns=['prompt']# read the first row as data
+       # print(self.start_pos.get())
+        
         if self.start_pos.get()!=None:
-            start_pos=df[df['prompt'].str.contains()].index[0]
+            start_pos=df[df['prompt'].str.contains(self.start_pos.get())].index[0]
         else:
             start_pos=-1
         df=df[start_pos+1:]
+        #print(df)
+        
         wait_time_after_enter_start = int(self.wait_time_after_enter_start.get())
         wait_time_after_enter_end = int(self.wait_time_after_enter_end.get())
         wait_time_after_paste = int(self.wait_time_after_paste.get())
         cmd_sum = int(self.cmd_sum.get())
         wait_time_after_onece_start = int(self.wait_time_after_onece_start.get())
         wait_time_after_onece_end = int(self.wait_time_after_onece_end.get())
+        pyperclip.copy('start')
+        if self.click_position:
+            pyautogui.click(self.click_position)
+        else:
+            pyautogui.click()
         
+        pyautogui.hotkey('ctrl', 'v')
+        pyautogui.press('enter')
+
         try:
             for i, row in df.iterrows():
                 
                 if not self.running:
                     break
                 for cell in row:
+                    #print(cell)
                     pyperclip.copy(str(cell))  # copy the data to the clipboard
                     if self.click_position:
                         pyautogui.click(self.click_position)
@@ -116,6 +129,8 @@ class App:
             self.start_button.config(state="normal")
             self.stop_button.config(state="disabled")  # 停止按钮被禁用
 
+            
+            
     def stop(self):
         self.running = False
 
@@ -126,3 +141,4 @@ class App:
 root = Tk()
 app = App(root)
 root.mainloop()
+
