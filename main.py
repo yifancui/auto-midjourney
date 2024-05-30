@@ -110,7 +110,7 @@ class App:
                 if not self.running:
                     break
                 for cell in row:
-                    #print(cell)
+                    print(cell)
                     pyperclip.copy(str(cell))  # copy the data to the clipboard
                     if self.click_position:
                         pyautogui.click(self.click_position)
@@ -119,6 +119,9 @@ class App:
                     pyautogui.hotkey('ctrl', 'v')
                     time.sleep(wait_time_after_paste)
                     pyautogui.press('enter')
+                    
+                    #with open(r"C:\Users\yvonn\auto-midjourney\down.txt", "a") as myfile: myfile.write(str(cell))
+                    
                     time.sleep(random.randint(wait_time_after_enter_start, wait_time_after_enter_end))
                     pyautogui.press('enter')
 
