@@ -13,8 +13,8 @@ def main(dog_breads,name):
             str3=f'/imagine prompt: watercolor art portrait of {i}, full body, {status}, no ground, white background'
             str4=f'/imagine prompt: a vintage, funky illustration of {i}, full body, {status}, no ground, white background'
             str5=f'/imagine prompt: a {i}, fully body, pixar cartoon style,{status}, 3d rendering, ultra-high definition quality, no ground, white background.'
-            str6=f'/imagine prompt: an illustration of {i}, in the style of Beatrix Potter, full body, {status}, no ground, background'
-            str7=f'/imagine prompt: an illustration of {i}, in the style of hyper realistic oil painting, full body, {status}, no ground, background'
+            str6=f'/imagine prompt: an illustration of {i}, in the style of Beatrix Potter, full body, {status}, no ground, white background'
+            str7=f'/imagine prompt: an illustration of {i}, in the style of hyper realistic oil painting, full body, {status}, no ground, white background'
             str8=f'/imagine prompt: a realistic black and white illustration of {i}, full body,{status}, in the style of minimalism, coloring page for adults, thick lines, low detail, dark shading, no color. No grey scale or shadows, white background'
             sentences.append(str1)
             sentences.append(str2)
